@@ -13,5 +13,3 @@ RUN apt-get update \
 FROM mono:latest
 
 COPY --from=unpacker /pickles /pickles
-
-ENTRYPOINT [ "mono",  "/pickles/Pickles.exe" ]
