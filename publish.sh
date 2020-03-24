@@ -1,7 +1,9 @@
 #! /bin/bash
 
 TOOL=devspace
-docker build -f $TOOL/Dockerfile --build-arg RELEASE_VERSION=latest --tag shopozor/$TOOL $TOOL
+K8S_VERSION=$(curl -Ls -o /dev/null -w %{url_effective} https://github.com/kubernetes/kubernetes/releases/latest | cut -d '/' -f 8)
+HELM_VERSION=$(curl -Ls https://github.com/helm/helm/releases | grep "/helm/helm/releases/tag/v3" | head -n 1 | sed 's/[^"]*"\([^"]*\)"[^"]*/\1/g' | cut -d '/' -f 6)
+docker build -f $TOOL/Dockerfile --build-arg DEVSPACE_VERSION=latest --build-arg K8S_VERSION=${K8S_VERSION} --build-arg HELM_VERSION=${HELM_VERSION} --tag shopozor/$TOOL $TOOL
 docker push shopozor/devspace
 
 TOOL=docker-compose
