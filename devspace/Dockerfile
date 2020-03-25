@@ -1,4 +1,4 @@
-FROM alpine:3.11.3
+FROM docker:latest
 
 ARG DEVSPACE_VERSION
 ARG K8S_VERSION
