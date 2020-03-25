@@ -17,3 +17,7 @@ docker push shopozor/$TOOL
 TOOL=python-lint
 docker build -f $TOOL/Dockerfile --tag shopozor/$TOOL $TOOL
 docker push shopozor/$TOOL
+
+TOOL=cypress
+docker build -f $TOOL/Dockerfile --build-arg CYPRESS_VERSION=3.8.3 --tag shopozor/$TOOL $TOOL
+docker push shopozor/$TOOL
