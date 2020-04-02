@@ -1,3 +1,5 @@
+FROM shopozor/graphql-engine:staging-latest AS hasura-migrations
+
 FROM docker:latest
 
 ARG DEVSPACE_VERSION
@@ -17,3 +19,5 @@ RUN apk add --update ca-certificates \
     && helm repo add stable https://kubernetes-charts.storage.googleapis.com \
     && helm repo add bitnami https://charts.bitnami.com/bitnami \
     && helm repo add codecentric https://codecentric.github.io/helm-charts
+
+COPY --from=hasura-migrations /bin/hasura-cli /usr/local/bin/hasura
